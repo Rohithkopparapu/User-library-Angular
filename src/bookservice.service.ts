@@ -1,0 +1,204 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core';
+import { BehaviorSubject, map } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BookserviceService implements OnInit {
+
+
+
+  auth_token=new BehaviorSubject<string>('');
+  ifeditthebooks=new BehaviorSubject<boolean>(false);
+  token!:string;
+ 
+  constructor(private http:HttpClient) { }
+
+  ngOnInit(): void {
+   
+  }
+  getUserDetails(email:string,password:string){
+
+    return this.http.post(`http://localhost:8000/login/email?email=${email}&password=${password}`,'').pipe(map((res)=>{
+      return res;
+     }))
+  }
+  getUserDetailsByPhone(phone:string,password:string){
+
+    return this.http.post(`http://localhost:8000/login?phone=${phone}&password=${password}`,'').pipe(map((res)=>{
+      return res;
+     }))
+  }
+  saveNewUser(newuser:any)
+  {
+    return this.http.post('http://localhost:8000/newUser',newuser).pipe(map((res)=>{
+      return res;
+     }))
+  }
+  
+  getBooksInLibraray(){
+    if(this.auth_token){
+      this.auth_token.subscribe((data)=>{
+        this.token=data;
+      })
+   
+    }
+ const headers = new HttpHeaders({
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`
+    });
+    return this.http.get('http://localhost:8000/catController/getBooks',{headers:headers}).pipe(map((res)=>{
+      return res;
+    }))
+  }
+
+  getBooksByCatName(categoryname:string){
+    if(this.auth_token){
+      this.auth_token.subscribe((data)=>{
+        this.token=data;
+      })
+   
+    }
+ const headers = new HttpHeaders({
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`
+    });
+    return this.http.get(`http://localhost:8000/catController/getBooks/${categoryname}`,{headers:headers}).pipe(map((res)=>{
+      return res;
+    }))
+  }
+
+  editbooks(id:any,bookdetails:any){
+    if(this.auth_token){
+      this.auth_token.subscribe((data)=>{
+        this.token=data;
+      })
+   
+    }
+ const headers = new HttpHeaders({
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`
+    });
+   return this.http.put(`http://localhost:8000/catController/updateBooks/${id}`,bookdetails,{headers:headers}).pipe(map((res)=>{
+      return res;
+    }))
+
+  }
+
+  deletebook(id:any){
+    if(this.auth_token){
+      this.auth_token.subscribe((data)=>{
+        this.token=data;
+      })
+   
+    }
+ const headers = new HttpHeaders({
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`
+    });
+   return this.http.delete(`http://localhost:8000/catController/deleteBooks/${id}`,{headers:headers}).pipe(map((res)=>{
+      return res;
+    }))
+
+  }
+
+  deletebooksbasedoncategory(categoryname:any,bookname:any){
+    if(this.auth_token){
+      this.auth_token.subscribe((data)=>{
+        this.token=data;
+      })
+   
+    }
+ const headers = new HttpHeaders({
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+     
+    });
+   return this.http.delete(`http://localhost:8000/catController/deleteBooksincategory/${categoryname}/${bookname}`,{headers:headers}).pipe(map((res)=>{
+      return res;
+    }))
+
+  }
+
+  
+  postnewbook(newbookdetails:any){
+    if(this.auth_token){
+      this.auth_token.subscribe((data)=>{
+        this.token=data;
+      })
+   
+    }
+ const headers = new HttpHeaders({
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+     
+    });
+   return this.http.post(`http://localhost:8000/catController/addBooks`,newbookdetails,{headers:headers}).pipe(map((res)=>{
+      return res;
+    }))
+
+  }
+  issuebook(id:any,book:any){
+    if(this.auth_token){
+      this.auth_token.subscribe((data)=>{
+        this.token=data;
+      })
+   
+    }
+ const headers = new HttpHeaders({
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+     
+    });
+   return this.http.post(`http://localhost:8000/catController//issueBooks/${id}`,book,{headers:headers}).pipe(map((res)=>{
+      return res;
+    }))
+
+  }
+
+  getStudentsList(){
+      if(this.auth_token){
+        this.auth_token.subscribe((data)=>{
+          this.token=data;
+        })
+     
+      }
+   const headers = new HttpHeaders({
+        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+       
+      });
+     return this.http.get(`http://localhost:8000/catController/studentusers`,{headers:headers}).pipe(map((res)=>{
+        return res;
+      }))
+  
+    
+  }
+  getIssuedBookedBasedOnStdId(id:any){
+    if(this.auth_token){
+      this.auth_token.subscribe((data)=>{
+        this.token=data;
+      })
+   
+    }
+ const headers = new HttpHeaders({
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+     
+    });
+   return this.http.get(`http://localhost:8000/catController/getIssuedBooks/${id}`,{headers:headers}).pipe(map((res)=>{
+      return res;
+    }))
+
+  
+}
+returnBooks(id:any,books:any){
+  if(this.auth_token){
+    this.auth_token.subscribe((data)=>{
+      this.token=data;
+    })
+ 
+  }
+const headers = new HttpHeaders({
+    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+   
+  });
+ return this.http.post(`http://localhost:8000/catController/returnBooksById/${id}`,books,{headers:headers}).pipe(map((res)=>{
+    return res;
+  }))
+}
+}
+
+

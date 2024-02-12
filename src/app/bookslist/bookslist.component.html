@@ -1,0 +1,52 @@
+<div style="background-color: bisque;">
+<div style="display: flex;flex-direction: row;justify-content: space-around;width: 100%;">
+    <div>
+        <h1 style="text-align: center;margin: 0;padding: 0;">Books</h1>
+       </div>
+      <div style="display: flex;flex-direction: row;justify-content: space-between;width: 36%;">
+        <div style="margin: 7px;">
+            <input type="text" placeholder="Enter Categoryname"  [(ngModel)]="searchByCategoryName">
+            <button style="margin-left: 5px;" type="button" class="edit-button" (click)="searchCatName()">Search</button>
+            <button style="margin-left: 5px;" type="button" class="edit-button" (click)="clear()">Clear</button>
+        </div>
+        <div style="margin: 7px;">
+            <button style="margin-left: 5px;" type="button" class="edit-button"  (click)="postnewbook()">Add New Book</button>
+        </div>
+      </div>
+</div>
+    <table class="books-table" style="border-radius:5px ;margin-left: 100px;width: 80%;">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Books</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="allbooksInLibrary">
+        <tr *ngFor="let book of allbooksInLibrary;let i= index">
+          <td *ngIf="editbook">{{ book.categoryname }}</td>
+          <td *ngIf="!editbook"><input type="text" [(ngModel)]="allbooksInLibrary[i].categoryname"></td>
+          <td>
+            <ul class="book-list">
+              <li *ngFor="let item of book.books;let j=index">
+                <span *ngIf="editbook" >{{ item.title }}</span>
+                <input *ngIf="!editbook" type="text" [(ngModel)]="allbooksInLibrary[i].books[j].title">
+                <button style="margin: 5px;" (click)="deletebookbasedonCat(book.categoryname,allbooksInLibrary[i].books[j].title)"><img src="https://cdn-icons-png.flaticon.com/128/484/484662.png" style="height: 20px;"></button>
+              </li>
+            </ul>
+          </td>
+          <td>
+            <button type="button" class="edit-button" (click)="editbooks(book)">Edit</button>
+            <button type="button" class="delete-button" (click)="deletebooks(book._id)">Delete</button>
+          </td>
+        </tr>
+        <tr *ngIf=" allbooksInLibrary && allbooksInLibrary.length === 0">
+               <td style="color: red;text-align: center;">{{message}}</td>
+        </tr>
+        <tr style="position:absolute;top: 40%;left: 40%;box-shadow: 5px 5px;" *ngIf="apiresponse != ''">
+            <td style="color: white;text-align: center;background-color: black;">{{apiresponse}}</td>
+     </tr>
+      </tbody>
+    </table>
+  </div>
+  

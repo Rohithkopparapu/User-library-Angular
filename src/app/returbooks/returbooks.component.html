@@ -1,0 +1,77 @@
+<div class="search-container">
+    <h1
+        style="color: yellow;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;text-align: center;font-size: 30px;">
+        Return Books</h1>
+    <div style="position: absolute;top: 15%;left: 43%;display: flex;flex-direction: column;">
+        <label style="color: white;font-size: 20px;">Student ID </label>
+        <div>
+            <input type="text" placeholder="Search..." [(ngModel)]="studentid" />
+            <button class="btn btn-primary return" (click)="search()">Search</button>
+            <button class="btn btn-primary return" (click)="clear()">Clear</button>
+        </div>
+    </div>
+    <div *ngIf="issuedbooks.length > 0" style="position: absolute;top: 30%;left: 30%;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th>Book Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let category of issuedbooks;">
+                    <tr *ngFor="let book of category.books;let i=index">
+                        <td>{{ book.categoryName }}</td>
+                        <td>{{ book.bookname }}</td>
+                        <button type="button"  *ngIf="!userreturnbooks[book.bookId]" class="btn btn-primary return" (click)="addBookToReturn(book,i)">Return Book</button>
+                        <button type="button"  *ngIf="userreturnbooks[book.bookId]" class="btn btn-primary return" (click)="remove(book,i)">Remove</button>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+
+    </div>
+    <div *ngIf="message != ''" style="position: absolute;top: 30%;left: 45%;" >
+          <span style="color: red;font-size: 20px;">{{message}}</span>
+    </div>
+</div>
+
+<button  *ngIf="issuedbooks.length > 0"  type="button" style="position: absolute;top: 2%;left: 80%;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="returnSomebooks()">
+   Return
+  </button>
+
+<button  *ngIf="issuedbooks.length > 0"  type="button" style="position: absolute;top: 2%;left: 90%;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="returnAllBooks()">
+    Return All
+  </button>
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <span style="font-size: 25px;font-family: 'Courier New', Courier, monospace;color: red;display: flex;flex-direction: column;">
+               <p>
+                    <span>Message : </span>{{message}}
+               </p>
+               <p >
+                     <span>Charges : </span>{{charges}}
+               </p>
+         </span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closepopup()" data-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: absolute;top: 2%;left: 80%;">
+    <button  type="button" class="btn btn-secondary" (click)="booklist()">Book List</button>
+  </div>

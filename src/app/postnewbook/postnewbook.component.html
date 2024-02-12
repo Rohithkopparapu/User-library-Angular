@@ -1,0 +1,39 @@
+<div style="background-color:#0000001f;">
+    <form [formGroup]="newbook" class="book-form">
+        <div class="form-group">
+            <h3 style="color: blue;text-align: center;">Add Book</h3>
+
+            <label class="label" style="color: white;">Please Enter Category Name</label>
+            <input type="text" placeholder="Category Name" class="form-control" formControlName="categoryname" />
+            <span *ngIf="newbook.get('categoryname')?.hasError('required') && newbook.get('categoryname')?.touched"
+            style="color: red;">Category Name is required</span>
+        </div>
+        <div formArrayName="books">
+            <label class="label" style="color: white;">Add Book details</label>
+            <div *ngFor="let book of connectFormArray.controls; let i = index" class="book-group">
+                <div [formGroupName]="i">
+                    <div class="d-flex justify-content-space align-items-center">
+                        <input type="text" placeholder="Book title" formControlName="title" class="form-control" />
+                        <span *ngIf="connectFormArray.controls[i].get('title')?.hasError('required') && connectFormArray.controls[i].get('title')?.touched"
+                        style="color: red;">Title is required</span>
+                        <button (click)="addbook()" class="btn btn-primary"><img
+                                src="https://cdn-icons-png.flaticon.com/128/3416/3416075.png" alt="Add"
+                                style="height: 20px;" /></button>
+                        <button (click)="removebook(i)" class="btn btn-danger"><img
+                                src="https://cdn-icons-png.flaticon.com/128/1828/1828899.png" alt="Remove"
+                                style="height: 20px;" /></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div *ngIf="message != ''">
+        <p class="message" >{{message}}</p>
+    </div>
+<div style="display: flex;flex-direction: row;justify-content: end;">
+    
+    <button style="margin-left: 5px;" type="button" class="edit-button"  (click)="savethebook()">Save</button>
+    <button style="margin-left: 5px;" type="button" class="edit-button" (click)="close()">Cancel</button>
+</div>
+</div>

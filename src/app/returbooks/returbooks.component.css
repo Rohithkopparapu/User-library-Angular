@@ -1,0 +1,81 @@
+.search-container {
+    background-image: url('https://th.bing.com/th?id=OIP.bexYMvLqpfUfh9KP3WG5FQHaJ4&w=216&h=288&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    margin: 0;
+    height: 100vh;
+    margin: auto;
+  }
+  
+  .search-container input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .search-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .search-container button:hover {
+    background-color: #0056b3;
+  }
+  /* Table style */
+table {
+    width:600px;
+    border-collapse: collapse;
+  }
+  
+  /* Table header style */
+  th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    color: rgb(15, 15, 15);
+  }
+  
+  /* Table row style */
+  tr {
+    border: 1px solid #ddd;
+    color: rgb(15, 15, 15);
+  }
+  
+  /* Table cell style */
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    color: rgb(15, 15, 15);
+  }
+  
+  /* Alternate row color */
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+    color: rgb(15, 15, 15);
+  }
+  
+  /* Nested list style */
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Book name list item style */
+  li {
+    margin-bottom: 4px;
+  }
+
+  .return{
+    margin: 5px;
+  }
+  

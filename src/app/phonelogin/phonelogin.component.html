@@ -1,0 +1,29 @@
+<div class="whole">
+    <h1 style="color:red;text-align: center;">Welcome to User Libraray Management System</h1>
+<div class="container" style="margin: auto;width: 500px;padding-top: 150px;" >
+    <h2 style="color: white;">Login</h2>
+    <form (ngSubmit)="onSubmit()" style="width: 500px;">
+        <div class="form-group">
+            <label style="color: white;">Phone Number</label>
+            <input type="number" class="form-control" style="width: 60%;" [(ngModel)]="PhoneNo" name="PhoneNo" [formControl]="phoneFormControl">
+            <div *ngIf="phoneFormControl.invalid && (phoneFormControl.dirty || phoneFormControl.touched)">
+                <span *ngIf="phoneFormControl.hasError('required')" style="color: red;">Phone Number is required</span>
+              </div>
+        </div>
+        <div class="form-group">
+            <label style="color: white;">Password</label>
+            <input type="password" class="form-control" style="width: 60%;" [(ngModel)]="password" name="password" [formControl]="passwordFormControl">
+            <div *ngIf="passwordFormControl.invalid && (passwordFormControl.dirty || passwordFormControl.touched)">
+                <span *ngIf="passwordFormControl.hasError('required')" style="color: red;">Password is required</span>
+              </div>
+        </div>
+        <button style="margin-top: 10px;" type="submit" class="btn btn-primary">Login</button>
+
+        <div style="margin-top: 10px;display: flex;flex-direction: row;justify-content: space-between;width: 300px;" >
+           <a routerLink="/newRegister" routerLinkActive="active" class="newRegister">New Registration</a>
+           <a routerLink="/login" routerLinkActive="active" class="newRegister">Login with Email</a>
+        </div>
+    </form>
+    <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
+</div>
+</div>

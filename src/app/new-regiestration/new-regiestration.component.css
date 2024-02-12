@@ -1,0 +1,16 @@
+.newRegister{
+    text-decoration: none;
+
+}.whole{
+    background: url(https://th.bing.com/th/id/OIP.nsj22a-XMza_kPx7KPIqFgHaFL?w=268&h=187&c=7&r=0&o=5&pid=1.7);
+    margin: 0;
+    padding: 0;
+    height: 600px;
+    width: 1340px;
+    margin: auto;
+    font-size: 20px;
+   
+}
+.row{
+    width: 650px;
+}

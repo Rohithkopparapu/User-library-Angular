@@ -1,0 +1,118 @@
+<div class="whole">
+<div class="container p-5 background-color" style="margin: auto;width: 500px;padding-top: 150px;" >
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-7 text-center">
+             <h2 style="color: red;">New Registration</h2>
+          </div>
+        </div>
+        <div class="row form-group mt-2">
+            <div class="col-2 text-right">
+                <label style="width: 100px;">Name:</label>
+            </div>
+            <div class="col-9">
+                <input style="width: 250px;" type="text" id="Name" class="form-control" formControlName="Name">
+                 <!-- <span class="text-danger" *ngIf="(loadRegistration.Name.touched || submitted) && loadRegistration.Name.errors?.required">*</span>  -->
+                 <span class="text-danger" *ngIf="(loadRegistration['Name'].touched || submitted) && loadRegistration['Name'].errors?.['required']">*</span>
+
+                </div>
+            <div class="col-1">
+            </div>
+        </div>
+
+        <div class="row form-group mt-2">
+            <div class="col-2 text-right">
+                <label style="width: 100px;">DOB: </label>
+            </div>
+            <div class="col-9 ">
+                <input style="width: 250px;" type="date" class="form-control" formControlName="DOB" id="date">
+                 <span class="text-danger" *ngIf="(loadRegistration['DOB'].touched || submitted) && loadRegistration['DOB'].errors?.['required']">*</span> 
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+
+        <div class="row form-group mt-2">
+            <div class="col-2 text-right">
+                <label style="width: 100px;">Gender: </label>
+            </div>
+            <div class="col-9 ">
+                <input  type="radio" id="male" value="male" formControlName="Gender">
+                <label class="margin-left">Male</label>
+                <input class="margin-left" type="radio" id="female" value="female" formControlName="Gender">
+                <label class="margin-left">Female</label>
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+
+        <div class="row form-group mt-2">
+            <div class="col-2 text-right">
+                <label style="width: 100px;">PhoneNo: </label>
+            </div>
+            <div class="col-9 ">
+                <input style="width: 250px;" type="number" formControlName="phone" id="PhoneNo" class="form-control">
+                 <span class="text-danger" *ngIf="(loadRegistration['phone'].touched || submitted) && loadRegistration['phone'].errors?.['required']">*</span> 
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+
+
+        <div class="row form-group mt-2">
+            <div class="col-2 text-right">
+                <label style="width: 100px;">EmailId: </label>
+            </div>
+            <div class="col-9 ">
+                <input style="width: 250px;" type="text" id="EmailId" class="form-control" formControlName="EmailId">
+                 <span class="text-danger" *ngIf="(loadRegistration['EmailId'].touched || submitted) && loadRegistration['EmailId'].errors?.['required']">*</span> 
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+
+        <div class="row form-group mt-2">
+            <div class="col-2 text-right">
+                <label style="width: 100px;">Password: </label>
+            </div>
+            <div class="col-9 ">
+                <input style="width: 250px;" type="password" formControlName="Password" class="form-control">
+                 <span class="text-danger" *ngIf="(loadRegistration['Password'].touched || submitted) && loadRegistration['Password'].errors?.['required']">*</span> 
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+
+        <div class="row form-group mt-2">
+            <div class="col-2 text-right">
+                <label style="width: 100px;">Roles: </label>
+            </div>
+            <div class="col-9 ">
+                <div class="mb-1">
+                   <select formControlName="role">Please Select Role
+                    <option style="width: 250px;" *ngFor="let role of roles;let i=index">{{role}}</option>
+                   </select>
+                </div>
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+
+        <div class="row form-group mt-2" style="margin-top: 20px;">
+            <div class="col-2">
+            </div>
+            <div class="col-9 text-right" style="margin-top: 20px;">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="row form-group mt-2">  
+            <div class="col-5" style="text-align: center;">
+                    <a class="newRegister" routerLink="/login" routerLinkActive="active">Already User Exist?</a>
+            </div>
+        </div>
+    </form>
+    <div *ngIf="message != ''" class="alert alert-danger">{{ message }}</div>
+</div>
+</div>
