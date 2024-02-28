@@ -13,6 +13,12 @@
   .books-table th {
     background-color: #f2f2f2;
   }
+  li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 38%;
+  }
   
   .book-list {
     list-style-type: none;

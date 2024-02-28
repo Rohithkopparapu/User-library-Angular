@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookserviceService } from 'src/bookservice.service';
-import { PostnewbookComponent } from '../postnewbook/postnewbook.component';
-import { data } from 'jquery';
-import { Observable, map, of } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-search-book',
@@ -33,7 +31,17 @@ export class SearchBookComponent {
   studentnumber!:any;
   check!:any;
   response:any='';
-  constructor(private service: BookserviceService, private modal: NgbModal,private router:Router) { }
+  constructor(private service: BookserviceService, private modal: NgbModal,private router:Router,private location:Location) {
+    window.addEventListener('popstate',() => {
+      // Add your logic to prevent or handle the navigation
+      const allowNavigation = false;
+      // Replace with your condition
+      if(!allowNavigation) {
+        // Restore the previous state and prevent the navigation
+        this.location.forward();
+      }
+    });
+   }
 
   ngOnInit(): void {
     this.getAllBooks();
@@ -62,19 +70,7 @@ export class SearchBookComponent {
       if (err) {
         this.response = 'Failed to Load Books';
       }
-    })
-    
-    // this.service.getBooksInLibraray().pipe(map((data, index) => {
-
-    //   const modifiedData = data.map((item:any, i:any) => ({ ...item, index: i }));
-    //   return modifiedData;
-    //  })
-    //   ).subscribe(modifiedData => {
-    //     // Assign the modified data to your class property
-    //     this.allbooksInLibrary = modifiedData;
-    //     console.log(this.allbooksInLibrary);  
-    //   });
-      
+    })    
   }
 
   clear() {

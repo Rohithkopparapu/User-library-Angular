@@ -1,7 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { data } from 'jquery';
 import { BookserviceService } from 'src/bookservice.service';
 
 @Component({
@@ -21,7 +21,17 @@ export class ListofstudentsComponent implements OnInit {
   selectedRowIndex: any = -1;
   loginUserId!: any;
   arrayForPayload: any[] = [];
-  constructor(private service: BookserviceService, private builder: FormBuilder,private router:Router) { }
+  constructor(private service: BookserviceService, private builder: FormBuilder,private router:Router,private location:Location) {
+    window.addEventListener('popstate',() => {
+      // Add your logic to prevent or handle the navigation
+      const allowNavigation = false;
+      // Replace with your condition
+      if(!allowNavigation) {
+        // Restore the previous state and prevent the navigation
+        this.location.forward();
+      }
+    });
+   }
 
   ngOnInit(): void {
 
@@ -40,7 +50,7 @@ export class ListofstudentsComponent implements OnInit {
 
   getList(): void {
 
-    const getLogindetails = localStorage.getItem('loginuserdetails');
+    const getLogindetails = sessionStorage.getItem('loginuserdetails');
     if (getLogindetails != undefined) {
       const deatils = JSON.parse(getLogindetails);
       if (deatils.role === 'Librarian' || deatils.role === 'Admin') {

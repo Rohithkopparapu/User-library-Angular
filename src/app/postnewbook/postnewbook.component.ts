@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,7 +11,17 @@ import { BookserviceService } from 'src/bookservice.service';
 })
 export class PostnewbookComponent implements OnInit {
 
-  constructor(private service:BookserviceService,private builder:FormBuilder,private activeModal:NgbActiveModal){}
+  constructor(private service:BookserviceService,private builder:FormBuilder,private activeModal:NgbActiveModal,private location:Location){
+    window.addEventListener('popstate',() => {
+      // Add your logic to prevent or handle the navigation
+      const allowNavigation = false;
+      // Replace with your condition
+      if(!allowNavigation) {
+        // Restore the previous state and prevent the navigation
+        this.location.forward();
+      }
+    });
+  }
   newbook!:FormGroup;
   message:string='';
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { BookserviceService } from 'src/bookservice.service';
 declare  var $:any;
@@ -10,11 +10,13 @@ declare  var $:any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+returnUrl!:string;
   email!:string;
   password!:string;
   message:string='';
-  constructor(private router:Router,private service:BookserviceService){}
+  constructor(private router:Router,private service:BookserviceService,private route:ActivatedRoute){
+    this.returnUrl=this.route.snapshot.queryParams['returnUrl'] || '/management';
+  }
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email
@@ -37,7 +39,8 @@ export class LoginComponent implements OnInit {
           this.service.auth_token.next(data.token);
           if(data.data.role != 'Student' || data.data.role != 'student'){
             this.service.ifeditthebooks.next(true);
-            localStorage.setItem('loginuserdetails',JSON.stringify(data.data));
+            sessionStorage.setItem('loginuserdetails',JSON.stringify(data.data));
+            sessionStorage.setItem('auth_token',data.token);
             this.service.userLoggedIn.next(true);
           }
           else{

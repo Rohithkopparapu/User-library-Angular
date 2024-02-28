@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookserviceService } from 'src/bookservice.service';
 import { PostnewbookComponent } from '../postnewbook/postnewbook.component';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-bookslist',
@@ -17,7 +18,17 @@ export class BookslistComponent implements OnInit {
   message!: string;
   editbook!:boolean;
   apiresponse:string='';
-  constructor(private service: BookserviceService,private modal:NgbModal,private router:Router) { }
+  constructor(private service: BookserviceService,private modal:NgbModal,private router:Router,private location:Location) {
+    window.addEventListener('popstate',() => {
+      // Add your logic to prevent or handle the navigation
+      const allowNavigation = false;
+      // Replace with your condition
+      if(!allowNavigation) {
+        // Restore the previous state and prevent the navigation
+        this.location.forward();
+      }
+    });
+   }
 
   ngOnInit(): void {
     this.getAllBooks();
@@ -68,7 +79,7 @@ export class BookslistComponent implements OnInit {
   }
 
   editbooks(book:any) {
-    const deatils=localStorage.getItem('loginuserdetails');
+    const deatils=sessionStorage.getItem('loginuserdetails');
    if(deatils != null){
     const userdetails=JSON.parse(deatils);
    if(userdetails.role === 'Admin' || userdetails.role === 'Librarian')
@@ -94,7 +105,7 @@ export class BookslistComponent implements OnInit {
   }
   deletebooks(book:any){
   
-    const deatils=localStorage.getItem('loginuserdetails');
+    const deatils=sessionStorage.getItem('loginuserdetails');
     if(deatils != null){
      const userdetails=JSON.parse(deatils);
      if(userdetails.role === 'Admin'){
@@ -125,7 +136,7 @@ export class BookslistComponent implements OnInit {
   }
 
   deletebookbasedonCat(cname:any,bname:any){
-      const deatils=localStorage.getItem('loginuserdetails');
+      const deatils=sessionStorage.getItem('loginuserdetails');
       if(deatils != null){
        const userdetails=JSON.parse(deatils);
        if(userdetails.role === 'Admin' || userdetails.role === 'Librarian'){
