@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
           if(data.data.role != 'Student' || data.data.role != 'student'){
             this.service.ifeditthebooks.next(true);
             localStorage.setItem('loginuserdetails',JSON.stringify(data.data));
+            this.service.userLoggedIn.next(true);
           }
           else{
             this.service.ifeditthebooks.next(false);

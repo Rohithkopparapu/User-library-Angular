@@ -1,0 +1,58 @@
+.books-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .books-table th, .books-table td {
+    border: 1px solid #f8f7f7;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  .books-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .book-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .book-list li {
+    margin-bottom: 5px;
+  }
+  
+  .edit-button, .delete-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .edit-button:hover, .delete-button:hover {
+    background-color: #45a049;
+  }
+  .disabled {
+    opacity: 1; /* Optional: Reduce opacity to visually indicate the disabled state */
+    pointer-events: none; /* Disable pointer events */
+}
+td li {
+    color: white;
+    font-size: 18px;
+}
+td{
+    color: white;
+    font-size: 18px;
+}
+
+button{
+    border-radius: 5px;
+}

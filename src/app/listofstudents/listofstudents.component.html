@@ -1,0 +1,63 @@
+<section class="container">
+    <div class="data">
+        <div  class="home">
+            <button class="btn btn-primary"  (click)="navigatetohome()" style="width: 70px;height: 35px;margin: 10px;" >Home</button>
+        <p class="students">Students Data</p>   
+        </div>
+        <div class="search">
+            <input type="text" [(ngModel)]="searchStudents" (input)="search()" class="display" placeholder="Search Students" />
+            <button class="btn btn-primary display" (click)="search()">Search</button>
+            <button class="btn btn-primary display" (click)="clear()">Clear</button>
+        </div>
+    </div>
+    <form [formGroup]="studentsForm">
+        <ng-container *ngIf="connectFormArray; else noStudents">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone No</th>
+                        <th>DOB</th>
+                        <th>Gender</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody formArrayName="students">
+                    <ng-container *ngFor="let student of connectFormArray; let i = index">
+                        <tr [formGroupName]="i">
+                            <ng-container>
+                                 <td><input formControlName="_id"></td>
+                                <td><input  formControlName="name"></td>
+                                <td><input formControlName="email"></td>
+                                <td><input formControlName="phone"></td>
+                                <td><input formControlName="DOB"></td>
+                                <td><input formControlName="gender"></td>
+                                <td>
+                                    <select formControlName="role">
+                                        <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button  *ngIf="!(selectedRowIndex === i)" (click)="edit(student,i)" (click)="onRowClicked(i)"><img src="https://cdn-icons-png.flaticon.com/128/7427/7427876.png"></button>
+                                    <button  *ngIf="(selectedRowIndex === i)"  (click)="Update(student,i)" (click)="onRowClicked(i)"><img src="https://cdn-icons-png.flaticon.com/128/1442/1442912.png"></button>
+                                    <button (click)="delete(student.get('_id')?.value)"><img src="https://cdn-icons-png.flaticon.com/128/1214/1214428.png"></button>
+                                    <!-- <button  *ngIf="connectFormArray.length-1 === i"  (click)="addStudents(i)"><img src="https://cdn-icons-png.flaticon.com/128/992/992651.png"></button> -->
+                                    </td>
+                            </ng-container>   
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </ng-container>
+        <ng-template #noStudents>
+            <div>{{ message }}</div>
+        </ng-template>
+    </form>
+    <div class="newuser">
+        <button class="btn btn-primary" (click)="newuser()">New User</button>
+    </div>
+</section>
+

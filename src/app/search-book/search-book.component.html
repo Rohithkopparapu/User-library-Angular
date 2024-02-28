@@ -1,0 +1,42 @@
+<div style="background-color: bisque;background-image: url(https://imgs.6sqft.com/wp-content/uploads/2016/10/14160508/nypl-book-stacks1-1024x619.jpg);">
+    <div style="display: flex;flex-direction: row;justify-content: space-around;width: 100%;align-items: center;">
+        <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-between;width: 50%;">
+            <button class="btn btn-primary"  (click)="navigatetohome()" style="width: 70px;height: 35px;margin: 10px;text-align: center;text-align: center;" >Home</button>
+            <h1 style="text-align: center;margin: 0;padding: 0;color: white;">Books Library</h1>
+        </div>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;">
+            <div style="margin: 7px;text-align: center;">
+                <input type="text" placeholder="Enter Categoryname" [(ngModel)]="searchByCategoryName" (input)="searchbooks()">
+                <button style="margin-left: 5px;" type="button" class="edit-button"
+                    (click)="searchbooks()">Search</button>
+                <button style="margin-left: 5px;" type="button" class="edit-button" (click)="clear()">Clear</button>
+            </div>
+        </div>
+    </div>
+    <table class="books-table" style="border-radius:5px ;margin-left: 100px;width: 80%;">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Books</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="allbooksInLibrary">
+             <tr *ngFor="let book of allbooksInLibrary;let i= index">
+                 <td *ngIf="editbook">{{ book["categoryname" ]}}</td> 
+                   <td *ngIf="!editbook">{{allbooksInLibrary[i].categoryname}}</td>   
+                 <td>
+                     <ul class="book-list">
+                        <li *ngFor="let item of book.books;let j=index">
+                            <span *ngIf="editbook">{{ item.title }}</span>
+                            <div style="display: flex;flex-direction: row;justify-content: space-between;">
+                                <p *ngIf="!editbook">{{allbooksInLibrary[i].books[j].title}}</p>
+                            </div>
+                        </li>
+                    </ul> 
+                </td>
+            </tr> 
+           <!-- <p style="color: white;">{{ allbooksInLibrary | async }}</p> -->
+        </tbody>
+    </table>
+</div>
+

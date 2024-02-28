@@ -1,0 +1,52 @@
+<section class="main">
+    <div class="header-1">
+         <div class="heading-left">
+              <div class="left-content">
+                   <!-- <img src="https://imgs.6sqft.com/wp-content/uploads/2016/10/14160508/nypl-book-stacks1-1024x619.jpg" class="logo" > -->
+                   <p class="logo-heading">User Library Management System</p>
+              </div>
+         </div>
+         <!-- <div class="heading-right">
+            <img src="https://thumbs.dreamstime.com/b/bookstore-women-buying-books-credit-card-inside-73281014.jpg" class="right-logo"> 
+         </div> -->
+    </div>
+    <div class="header-2">
+        <div class="manage">
+            <div class=" managestudents">
+              <img src="https://cdn-icons-png.flaticon.com/128/2940/2940438.png" class="logos">
+              <a routerLink="/studentslist" routerLinkActive="active" class="students">Manage Students</a>
+            </div>
+            <div class="managebook">
+                <img src="https://cdn-icons-png.flaticon.com/128/2847/2847689.png" class="logos">
+                <a routerLink="/bookslist"  routerLinkActive="active" class="students">Manage Book</a>
+            </div>
+            <div class="searchbook" >
+                <img src="https://cdn-icons-png.flaticon.com/128/667/667332.png"  class="logos">
+                <a routerLink="/searchbooks"  routerLinkActive="active"  class="students">Search Book</a>
+            </div>
+            <div class="manageborrower">
+                <img src="https://cdn-icons-png.flaticon.com/128/9474/9474404.png" class="logos">
+                <a routerLink="/student/booklist" routerLinkActive="active" class="students">Issue Books</a>
+            </div>
+        </div>
+        <div class="admin">
+            <div class="genratebreak">
+                <img src="https://cdn-icons-png.flaticon.com/128/10000/10000662.png" class="logos">
+                <a routerLink='/returnbooks' routerLinkActive="active" class="students">Return Books</a>
+            </div>
+            <div class="Adminsettings">
+                <img src="https://cdn-icons-png.flaticon.com/128/503/503822.png" class="logos">
+                <a class="students">Admin Settings</a>
+            </div>
+            <div class="generatereport">
+                <img src="https://cdn-icons-png.flaticon.com/128/9920/9920087.png" class="logos">
+                <a class="students">Genrate Report</a>
+            </div>
+            <div class="logout">
+                <img src="https://cdn-icons-png.flaticon.com/128/9708/9708932.png" class="logos">
+                <a routerLink='/login' (click)="logout()" routerLinkActive="active" class="students">Logout</a>
+            </div>
+        </div>
+    </div>
+</section> 
+<router-outlet></router-outlet>

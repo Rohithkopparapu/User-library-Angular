@@ -9,43 +9,53 @@ import { ReturbooksComponent } from './returbooks/returbooks.component';
 import { ManagementComponent } from './management/management.component';
 import { ListofstudentsComponent } from './listofstudents/listofstudents.component';
 import { SearchBookComponent } from './search-book/search-book.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
     path:'newRegister',
-    component:NewRegiestrationComponent
+    component:NewRegiestrationComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'login',
-    component:LoginComponent
+    component:LoginComponent,
+ 
   },
   {
     path:'phonelogin',
-    component:PhoneloginComponent
+    component:PhoneloginComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'bookslist',
-    component:BookslistComponent
+    component:BookslistComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'student/booklist',
-    component:StudentslistComponent
+    component:StudentslistComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'returnbooks',
-    component:ReturbooksComponent
+    component:ReturbooksComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'management',
-    component:ManagementComponent
+    component:ManagementComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'studentslist',
-    component:ListofstudentsComponent
+    component:ListofstudentsComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'searchbooks',
-    component:SearchBookComponent
+    component:SearchBookComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'',

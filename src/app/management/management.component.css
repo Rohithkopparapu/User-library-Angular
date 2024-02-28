@@ -1,0 +1,206 @@
+.main{
+    margin: 5px;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+    border: 5px solid maroon;
+    height: 640px;
+  }
+  
+  
+  /* .header-1 {
+      background-color: maroon;
+      width: 100%;
+      height: 100px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      position: relative;
+      border-top-left-radius: 20px; /* Adjust as needed 
+      border-top-right-radius: 20px; /* Adjust as needed 
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px; 
+      overflow: hidden; /* Hide overflow from rounded corners 
+  } */
+  
+/*   
+  .header-1::before,
+  .header-1::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      border-radius: 50%;
+      z-index: -1;
+  }
+   */
+  /* .header-1::before {
+      top: 0;
+      left: -50%;
+  }
+  
+  .header-1::after {
+      top: 0;
+      right: -50%;
+  } */
+  
+  .left-content{
+      background-color: maroon;
+      display: flex;
+      justify-content: center;
+  }
+  .logo{
+      height: 90px;
+      margin: 5px;
+  }
+  .logo-heading{
+      font-size: 45px;
+      color: white;
+      text-align: center;
+      padding-top: 8px;
+  }
+  .right-logo{
+      height: 100px;
+      width: 150px;
+  }
+  
+  .logos{
+      height: 80px;
+      background-color: white;
+      border-radius: 5px;
+  }
+  
+  .header-2{
+    position: relative;
+    /* border: 5px solid maroon; */
+    width: 100%;
+    height: 480px;
+  
+  
+  }
+  .manage{
+      position: absolute;
+      width: 80vw;
+      height: 150px;
+      background-color: white;
+      top: 20%;
+      left: 15%;
+      display: flex;
+      flex-direction: row;
+  }
+  .managestudents{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* padding: 5px; */
+      width: 20%;
+      background-color: maroon;
+      margin: 5px;
+      border-radius: 5px;
+      
+  }
+  .students{
+        font-size: 18px;
+        color: white;
+        text-align: center;
+        padding: 5px;
+        cursor: pointer;
+  }
+  .managebook{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      width: 20%;
+      background-color: maroon;
+      margin: 5px;
+      border-radius: 5px;
+  }
+  
+  .searchbook{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      width: 20%;
+      background-color: maroon;
+      margin: 5px;
+      border-radius: 5px;
+  }
+  .manageborrower{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      width: 20%;
+      background-color: maroon;
+      margin: 5px;
+      border-radius: 5px;
+  }
+  
+  a{
+      text-decoration: none;
+  }
+  .admin{
+      position: absolute;
+      width: 80vw;
+      height: 150px;
+      background-color: white;
+      top: 60%;
+      left: 15%;
+      display: flex;
+      flex-direction: row;
+  }
+  .Adminsettings{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      width: 20%;
+      background-color: maroon;
+      margin: 5px;
+      border-radius: 5px;
+  }
+  .generatereport{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      width: 20%;
+      background-color: maroon;
+      margin: 5px;
+      border-radius: 5px;
+  }
+  
+  .genratebreak{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      width: 20%;
+      background-color: maroon;
+      margin: 5px;
+      border-radius: 5px;
+  }
+  .logout{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      width: 20%;
+      background-color: maroon;
+      margin: 5px;
+      border-radius: 5px;
+  }

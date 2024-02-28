@@ -1,0 +1,93 @@
+.container {
+    /* margin: 20px; */
+    background-color: blanchedalmond;
+    height: 600px;
+    width: 100%;
+   background-image: url(https://th.bing.com/th?id=OIP.-xZbI_CcFVh92LTn5g0eSQHaE8&w=306&h=204&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2);
+   background-repeat: repeat;
+   background-size:contain ;
+}
+.search{
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.home{
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #f2f2f2;
+}
+
+th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.no-data-message {
+    font-size: 18px;
+    color: #555;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.delete{
+    margin: 5px;
+}
+input{
+    width: 150px;
+}
+.data{
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.students{
+    font-size: 30px;
+    color: #151515;
+    text-align: center;
+    margin: 15px;
+    padding: 7px;
+    font-weight: bold;
+}
+.display{
+    margin: 15px;
+}
+img{
+    height: 25px;
+}
+button{
+    border: none;
+    border-radius: 5px;
+}
+.error-message {
+    background-color: #ffcccc; /* Light red */
+    color: #990000; /* Dark red */
+    border: 1px solid #990000; /* Dark red border */
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.newuser{
+  float: right;
+  margin-top: 40px;
+}
