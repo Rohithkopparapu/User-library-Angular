@@ -1,7 +1,7 @@
 <div style="background-color: bisque;">
     <div style="display: flex;flex-direction: row;justify-content: space-around;width: 100%;">
         <div>
-            <h1 style="text-align: center;margin: 0;padding: 0;">Get Books</h1>
+            <h1 style="text-align: center;margin: 0;padding: 0;">Issue Books</h1>
         </div>
         <div style="display: flex;flex-direction: row;justify-content: space-between;width: 36%;">
             <div style="margin: 7px;">
@@ -69,9 +69,9 @@
     data-toggle="modal" data-target="#exampleModal">
     Request Books
 </button>
-<button style="position: absolute;top: 1%;left: 90%;" type="button" class="btn btn-primary" (click)="returnbooks()"
+<button style="position: absolute;top: 1%;left: 5%;" type="button" class="btn btn-primary" (click)="returnbooks()"
     data-toggle="modal" data-target="#exampleModal">
-    Return Books
+  Home
 </button>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -137,3 +137,4 @@
       </div>
     </div>
   </div>
+  <div *ngIf="apiresponse" class="toaster">{{ apiresponse }}</div>

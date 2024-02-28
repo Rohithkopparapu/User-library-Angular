@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookserviceService } from 'src/bookservice.service';
 import { PostnewbookComponent } from '../postnewbook/postnewbook.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bookslist',
@@ -16,7 +17,7 @@ export class BookslistComponent implements OnInit {
   message!: string;
   editbook!:boolean;
   apiresponse:string='';
-  constructor(private service: BookserviceService,private modal:NgbModal) { }
+  constructor(private service: BookserviceService,private modal:NgbModal,private router:Router) { }
 
   ngOnInit(): void {
     this.getAllBooks();
@@ -32,8 +33,8 @@ export class BookslistComponent implements OnInit {
       this.allbooks = data;
       this.allbooksInLibrary = this.allbooks;
     }, (err) => {
-      if (err.status === 404) {
-        this.message = 'Failed to Load Books'
+      if (err) {
+        this.message = err.error.message;
       }
     })
   }
@@ -112,6 +113,12 @@ export class BookslistComponent implements OnInit {
        }, 2000);
       })
      }
+     else{
+      this.apiresponse = 'Records Can be deleted by Admin';
+      setTimeout(() => {
+        this.apiresponse=''
+      }, 2000);
+     }
 
     }
 
@@ -121,7 +128,7 @@ export class BookslistComponent implements OnInit {
       const deatils=localStorage.getItem('loginuserdetails');
       if(deatils != null){
        const userdetails=JSON.parse(deatils);
-       if(userdetails.role === 'Admin'){
+       if(userdetails.role === 'Admin' || userdetails.role === 'Librarian'){
         this.service.deletebooksbasedoncategory(cname,bname).subscribe((data:any)=>{
           if(data){
             this.apiresponse=data.message;
@@ -136,6 +143,11 @@ export class BookslistComponent implements OnInit {
            this.apiresponse = '';
          }, 2000);
         })
+       } else{
+        this.apiresponse = 'Records Can be deleted by Admin';
+        setTimeout(() => {
+          this.apiresponse=''
+        }, 2000);
        }
       }
     
@@ -143,6 +155,10 @@ export class BookslistComponent implements OnInit {
 
   postnewbook(){
     this.modal.open(PostnewbookComponent);
+  }
+
+  navigatetohome(){
+    this.router.navigate(['management']);
   }
 
 }

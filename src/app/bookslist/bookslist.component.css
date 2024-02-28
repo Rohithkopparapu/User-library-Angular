@@ -40,4 +40,6 @@
   .edit-button:hover, .delete-button:hover {
     background-color: #45a049;
   }
-  
+  button{
+    border-radius: 5px;
+  }

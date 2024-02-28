@@ -1,4 +1,4 @@
-.newRegister{
+/* .newRegister{
     text-decoration: none;
 
 }
@@ -9,4 +9,68 @@
     height: 600px;
     width: 1340px;
     margin: auto;
+} */
+.main{
+    margin: 5px;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+    border: 5px solid rgba(255, 255, 255, 0.432); 
+    background-color: rgba(220, 220, 220, 0.322);
+    width: 99%;
+    height: 600px;
+    overflow-x: hidden;
+    border: none;
+}
+.content{
+    width: 70%;
+    height: 450px;
+    margin-left: 170px;
+    margin-right: 60px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 10px;
+}
+.image-content{
+   /* width: 45%; */
+}
+.logo{
+    width: 450px;
+    height: 450px;
+    border-radius: 5px;
+}
+.login-content{
+    margin-top: 100px;
+    margin-left: 50px;
+    width: 350px;
+}
+.login{
+
+}
+.login-word{
+    font-size: 25px;
+}
+.message{
+    font-size: 15px;
+}
+.password{
+    margin-top: 30px;
+}
+.email{
+    margin-top: 10px;
+}
+.forgot{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+a{
+    text-decoration: none;
 }

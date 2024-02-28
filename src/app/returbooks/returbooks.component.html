@@ -1,10 +1,13 @@
 <div class="search-container">
-    <h1
-        style="color: yellow;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;text-align: center;font-size: 30px;">
+   <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-between;width: 50%;">
+    <button  type="button" class="btn btn-secondary" (click)="booklist()">Home</button>
+    <!-- <button  type="button" class="btn btn-secondary" (click)="issuebooks()">Issue Books</button> -->
+    <h1 style="color: white;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;text-align: center;font-size: 35px;color: black;">
         Return Books</h1>
-    <div style="position: absolute;top: 15%;left: 43%;display: flex;flex-direction: column;">
+   </div>
+    <div style="position: absolute;top: 10%;left: 43%;display: flex;flex-direction: column;">
         <label style="color: white;font-size: 20px;">Student ID </label>
-        <div>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;">
             <input type="text" placeholder="Search..." [(ngModel)]="studentid" />
             <button class="btn btn-primary return" (click)="search()">Search</button>
             <button class="btn btn-primary return" (click)="clear()">Clear</button>
@@ -72,6 +75,6 @@
     </div>
   </div>
 
-  <div style="position: absolute;top: 2%;left: 80%;">
-    <button  type="button" class="btn btn-secondary" (click)="booklist()">Book List</button>
-  </div>
+  <!-- <div style="position: absolute;top: 2%;left: 35%;">
+    <button  type="button" class="btn btn-secondary" (click)="booklist()">Home</button>
+  </div> -->

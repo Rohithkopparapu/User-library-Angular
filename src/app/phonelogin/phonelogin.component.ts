@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { BookserviceService } from 'src/bookservice.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class PhoneloginComponent implements OnInit{
   ]
   )
 
-  constructor(private router:Router,private service:BookserviceService,private toaster:ToastrService){}
+  constructor(private router:Router,private service:BookserviceService){}
 
   ngOnInit(): void {
     
@@ -43,7 +42,7 @@ export class PhoneloginComponent implements OnInit{
       }) 
     }
     else{
-     this.toaster.error('Phone Number and Password Required');
+     alert('Phone Number and Password Required');
     }
   }
 

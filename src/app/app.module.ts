@@ -9,11 +9,16 @@ import { NewRegiestrationComponent } from './new-regiestration/new-regiestration
 import { LoginComponent } from './login/login.component';
 import { PhoneloginComponent } from './phonelogin/phonelogin.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideToastr } from 'ngx-toastr';
 import { BookslistComponent } from './bookslist/bookslist.component';
 import { PostnewbookComponent } from './postnewbook/postnewbook.component';
 import { StudentslistComponent } from './studentslist/studentslist.component';
 import { ReturbooksComponent } from './returbooks/returbooks.component';
+import { ManagementComponent } from './management/management.component';
+import { ListofstudentsComponent } from './listofstudents/listofstudents.component';
+import { AdminsettingsComponent } from './adminsettings/adminsettings.component';
+import { GenrateGraphsComponent } from './genrate-graphs/genrate-graphs.component';
+import { GenratebackupComponent } from './genratebackup/genratebackup.component';
+import { SearchBookComponent } from './search-book/search-book.component';
 
 
 
@@ -27,6 +32,12 @@ import { ReturbooksComponent } from './returbooks/returbooks.component';
     PostnewbookComponent,
     StudentslistComponent,
     ReturbooksComponent,
+    ManagementComponent,
+    ListofstudentsComponent,
+    AdminsettingsComponent,
+    GenrateGraphsComponent,
+    GenratebackupComponent,
+    SearchBookComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +49,7 @@ import { ReturbooksComponent } from './returbooks/returbooks.component';
   ],
   providers:[
     provideAnimations(), // required animations providers
-    provideToastr(), // Toastr providers
+
   ],
   bootstrap: [AppComponent]
 })

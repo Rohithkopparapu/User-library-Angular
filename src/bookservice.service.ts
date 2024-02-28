@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +20,13 @@ export class BookserviceService implements OnInit {
   }
   getUserDetails(email:string,password:string){
 
-    return this.http.post(`http://localhost:8000/login/email?email=${email}&password=${password}`,'').pipe(map((res)=>{
+    return this.http.post(`http://localhost:8081/login/email?email=${email}&password=${password}`,'').pipe(map((res)=>{
       return res;
      }))
   }
   getUserDetailsByPhone(phone:string,password:string){
 
-    return this.http.post(`http://localhost:8000/login?phone=${phone}&password=${password}`,'').pipe(map((res)=>{
+    return this.http.post(`http://localhost:8081/login?phone=${phone}&password=${password}`,'').pipe(map((res)=>{
       return res;
      }))
   }
@@ -37,7 +37,7 @@ export class BookserviceService implements OnInit {
      }))
   }
   
-  getBooksInLibraray(){
+  getBooksInLibraray():Observable<any>{
     if(this.auth_token){
       this.auth_token.subscribe((data)=>{
         this.token=data;
@@ -45,11 +45,12 @@ export class BookserviceService implements OnInit {
    
     }
  const headers = new HttpHeaders({
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`
     });
     return this.http.get('http://localhost:8000/catController/getBooks',{headers:headers}).pipe(map((res)=>{
       return res;
     }))
+   
   }
 
   getBooksByCatName(categoryname:string){
@@ -60,7 +61,7 @@ export class BookserviceService implements OnInit {
    
     }
  const headers = new HttpHeaders({
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`
     });
     return this.http.get(`http://localhost:8000/catController/getBooks/${categoryname}`,{headers:headers}).pipe(map((res)=>{
       return res;
@@ -75,7 +76,7 @@ export class BookserviceService implements OnInit {
    
     }
  const headers = new HttpHeaders({
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`
     });
    return this.http.put(`http://localhost:8000/catController/updateBooks/${id}`,bookdetails,{headers:headers}).pipe(map((res)=>{
       return res;
@@ -91,7 +92,7 @@ export class BookserviceService implements OnInit {
    
     }
  const headers = new HttpHeaders({
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`
     });
    return this.http.delete(`http://localhost:8000/catController/deleteBooks/${id}`,{headers:headers}).pipe(map((res)=>{
       return res;
@@ -107,7 +108,7 @@ export class BookserviceService implements OnInit {
    
     }
  const headers = new HttpHeaders({
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`,
      
     });
    return this.http.delete(`http://localhost:8000/catController/deleteBooksincategory/${categoryname}/${bookname}`,{headers:headers}).pipe(map((res)=>{
@@ -125,7 +126,7 @@ export class BookserviceService implements OnInit {
    
     }
  const headers = new HttpHeaders({
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`,
      
     });
    return this.http.post(`http://localhost:8000/catController/addBooks`,newbookdetails,{headers:headers}).pipe(map((res)=>{
@@ -141,7 +142,7 @@ export class BookserviceService implements OnInit {
    
     }
  const headers = new HttpHeaders({
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`,
      
     });
    return this.http.post(`http://localhost:8000/catController//issueBooks/${id}`,book,{headers:headers}).pipe(map((res)=>{
@@ -158,7 +159,7 @@ export class BookserviceService implements OnInit {
      
       }
    const headers = new HttpHeaders({
-        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`,
        
       });
      return this.http.get(`http://localhost:8000/catController/studentusers`,{headers:headers}).pipe(map((res)=>{
@@ -175,7 +176,7 @@ export class BookserviceService implements OnInit {
    
     }
  const headers = new HttpHeaders({
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`,
      
     });
    return this.http.get(`http://localhost:8000/catController/getIssuedBooks/${id}`,{headers:headers}).pipe(map((res)=>{
@@ -192,13 +193,62 @@ returnBooks(id:any,books:any){
  
   }
 const headers = new HttpHeaders({
-    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1YjczMTFhY2RjNGUzZjE3MDAyNDc5NyIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoiVmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDc3MTk4NzYsImV4cCI6MTcwNzcyMzQ3Nn0.r1Z4KRbsUHircxJracVAht_LPmfT7tk9oCM0TFDLE4E`,
+    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`,
    
   });
  return this.http.post(`http://localhost:8000/catController/returnBooksById/${id}`,books,{headers:headers}).pipe(map((res)=>{
     return res;
   }))
 }
+
+getStudentslist(){
+  if(this.auth_token){
+    this.auth_token.subscribe((data)=>{
+      this.token=data;
+    })
+ 
+  }
+const headers = new HttpHeaders({
+    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`,
+   
+  });
+ return this.http.get(`http://localhost:8000/catController/getStudentlist`,{headers:headers}).pipe(map((res)=>{
+    return res;
+  }))
+}
+
+updateStudents(id:any,list:any){
+  if(this.auth_token){
+    this.auth_token.subscribe((data)=>{
+      this.token=data;
+    })
+ 
+  }
+const headers = new HttpHeaders({
+    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`,
+   
+  });
+ return this.http.put(`http://localhost:8000/catController/students/${id}`,list,{headers:headers}).pipe(map((res)=>{
+    return res;
+  }))
+}
+
+deleteStudentList(id:any){
+  if(this.auth_token){
+    this.auth_token.subscribe((data)=>{
+      this.token=data;
+    })
+ 
+  }
+const headers = new HttpHeaders({
+    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJpZCI6IjY1ZDJlZTkwOWVhYmVjYjE5MzgxN2IyZCIsIm5hbWUiOiJWaWpheSIsImVtYWlsIjoidmlqYXlAZ21haWwuY29tIiwicm9sZSI6IkxpYnJhcmlhbiJ9LCJpYXQiOjE3MDkwOTQzNjcsImV4cCI6MTcwOTA5OTE2N30.vnS99k-tvubBMgOdMY9D0Q6TsNQO3llBqgVxKIYdLYg`,
+   
+  });
+ return this.http.delete(`http://localhost:8000/catController/student/${id}`,{headers:headers}).pipe(map((res)=>{
+    return res;
+  }))
+}
+
 }
 
 

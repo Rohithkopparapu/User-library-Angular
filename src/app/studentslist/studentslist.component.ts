@@ -43,9 +43,14 @@ export class StudentslistComponent implements OnInit {
 
 
   studentslist(){
-    this.service.getStudentsList().subscribe((data:any)=>{
-    this.listofstudents=data;
-    })
+    // this.service.getStudentsList().subscribe((data:any)=>{
+    // this.listofstudents=data;
+    // },(err)=>{
+    //   if(err){
+    //     this.apiresponse = err.error.message;
+    //   }
+    // })
+    
   }
 
   getAllBooks() {
@@ -59,7 +64,7 @@ export class StudentslistComponent implements OnInit {
       }
     }, (err) => {
       if (err) {
-        this.response = 'Failed to Load Books';
+        this.apiresponse = err.error.message;
       }
     })
   }
@@ -74,8 +79,8 @@ export class StudentslistComponent implements OnInit {
           }
         },
         (err) => {
-          if (err.status === 501) {
-            console.log(err);
+          if (err) {
+            this.apiresponse = err.error.message;
           }
         }
       );
@@ -173,7 +178,7 @@ export class StudentslistComponent implements OnInit {
          
         }, (err) => {
           if (err) {
-            this.message = err.error.errors[0];
+            this.apiresponse = err.error.errors[0];
            
           }
         })
@@ -243,6 +248,9 @@ export class StudentslistComponent implements OnInit {
       $('#exampleModal').modal('hide');
       this.issusebooks();
     }
+    else{
+      this.message = 'Invalid Details';
+    }
     }
     else if(this.studentnumber != '' && this.studentpassword != ''){
       const check = this.listofstudents.find(item=>item.phone === this.studentnumber && item.password === this.studentpassword);
@@ -251,6 +259,9 @@ export class StudentslistComponent implements OnInit {
         $('#requestModal').modal('show');
         $('#exampleModal').modal('hide');
         this.issusebooks();
+      }
+      else{
+        this.message = 'Invalid Details';
       }
     }
     else{
@@ -276,7 +287,6 @@ export class StudentslistComponent implements OnInit {
     this.booksstudentswant=[];
   }
   returnbooks(){
-    this.router.navigate(['returnbooks']);
+    this.router.navigate(['management']);
   }
-
 }

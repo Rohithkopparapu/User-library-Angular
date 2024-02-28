@@ -1,4 +1,4 @@
-<div class="whole">
+<!-- <div class="whole">
     <h1 style="color:red;text-align: center;">Welcome to User Libraray Management System</h1>
     <div class="container" style="margin: auto;width: 500px;padding-top: 150px;" >
         <h2 style="color: white;">Login</h2>
@@ -31,7 +31,7 @@
 
 <div id="myModal" class="modal fade modal-xl" role="dialog" >
     <div class="modal-dialog" style="max-width: 900px !important;">
-        <!-- Modal content -->
+         Modal content 
         <div class="modal-content">
             <div class="modal-header">
             </div>
@@ -40,4 +40,42 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+<section class="main">
+    <div class="content">
+        <div class="image-content">
+             <img src="../../assets/pexels-olena-bohovyk-3646172.jpg" class="logo">
+        </div>
+        <div class="login-content">
+             <div class="login">
+                <h3 class="login-word">Login</h3>
+                <p class="message">Welcome to User Library Management</p>
+             </div>
+             <form (ngSubmit)="onSubmit()" >
+                <div class="form-group">
+                    <label style="color: violet;">Email address</label>
+                    <input type="email" class="form-control" style="width: 100%;" [(ngModel)]="email" name="email" required  [formControl]="emailFormControl">
+                    <div *ngIf="emailFormControl.invalid && (emailFormControl.dirty || emailFormControl.touched)">
+                      <span *ngIf="emailFormControl.hasError('required')" style="color: red;">Email is required</span>
+                       <span *ngIf="emailFormControl.hasError('email')" style="color: red;">Invalid email address</span> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="color: violet;">Password</label>
+                    <input type="password" class="form-control" style="width: 100%;" [(ngModel)]="password" name="password" [formControl]="passwordFormControl">
+                    <div *ngIf="passwordFormControl.invalid && (passwordFormControl.dirty || passwordFormControl.touched)">
+                        <span *ngIf="passwordFormControl.hasError('required')" style="color: red;">Password is required</span>
+                      </div>
+                </div>
+               <div class="forgot">
+                    <a style="margin-top: 40px;float: right;margin-right: 20px;" class="href">Forgot Password</a>
+                    <button style="margin-top: 30px;color: white;float: right;margin-right: 0px;" type="submit" class="btn btn-primary">Login</button>
+                </div>
+                <div style="margin-top: 10px;display: flex;flex-direction: row;justify-content: space-between;width: 356px;" >
+                   <a routerLink="/newRegister" routerLinkActive="active" class="newRegister">New Registration</a>
+                   <a routerLink="/phonelogin" routerLinkActive="active" class="newRegister" >Login with PhoneNo</a>
+                </div>
+            </form>
+          </div>
+    </div>
+</section>

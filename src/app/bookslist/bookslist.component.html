@@ -1,11 +1,12 @@
 <div style="background-color: bisque;">
-<div style="display: flex;flex-direction: row;justify-content: space-around;width: 100%;">
-    <div>
-        <h1 style="text-align: center;margin: 0;padding: 0;">Books</h1>
+<div style="display: flex;flex-direction: row;justify-content: space-between;width: 100%;align-items: center;">
+    <div style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;width: 50%;">
+        <button class="edit-button"  (click)="navigatetohome()" style="width: 70px;height: 35px;margin: 10px;text-align:center;" >Home</button>
+        <h1 style="text-align: center;margin: 0;padding: 0;">Books List</h1>
        </div>
-      <div style="display: flex;flex-direction: row;justify-content: space-between;width: 36%;">
+      <div style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;">
         <div style="margin: 7px;">
-            <input type="text" placeholder="Enter Categoryname"  [(ngModel)]="searchByCategoryName">
+            <input type="text" placeholder="Enter Categoryname"  [(ngModel)]="searchByCategoryName"  (input)="searchCatName()">
             <button style="margin-left: 5px;" type="button" class="edit-button" (click)="searchCatName()">Search</button>
             <button style="margin-left: 5px;" type="button" class="edit-button" (click)="clear()">Clear</button>
         </div>
@@ -31,7 +32,7 @@
               <li *ngFor="let item of book.books;let j=index">
                 <span *ngIf="editbook" >{{ item.title }}</span>
                 <input *ngIf="!editbook" type="text" [(ngModel)]="allbooksInLibrary[i].books[j].title">
-                <button style="margin: 5px;" (click)="deletebookbasedonCat(book.categoryname,allbooksInLibrary[i].books[j].title)"><img src="https://cdn-icons-png.flaticon.com/128/484/484662.png" style="height: 20px;"></button>
+                <button style="margin: 5px;border: none;border-radius: 5px;background-color: bisque;" (click)="deletebookbasedonCat(book.categoryname,allbooksInLibrary[i].books[j].title)"><img src="https://cdn-icons-png.flaticon.com/128/484/484662.png" style="height: 20px;"></button>
               </li>
             </ul>
           </td>
@@ -49,4 +50,4 @@
       </tbody>
     </table>
   </div>
-  
+  <div *ngIf="apiresponse" class="toaster">{{ apiresponse }}</div>

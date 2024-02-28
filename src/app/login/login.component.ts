@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 import { BookserviceService } from 'src/bookservice.service';
 declare  var $:any;
@@ -15,7 +14,7 @@ export class LoginComponent implements OnInit {
   email!:string;
   password!:string;
   message:string='';
-  constructor(private router:Router,private toaster:ToastrService,private service:BookserviceService){}
+  constructor(private router:Router,private service:BookserviceService){}
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email
@@ -44,7 +43,7 @@ export class LoginComponent implements OnInit {
             this.service.ifeditthebooks.next(false);
           }
            setTimeout(() => {
-              this.router.navigate(['bookslist'])
+              this.router.navigate(['management'])
            }, 1000);
         }
       },(error:any)=>{
@@ -54,7 +53,7 @@ export class LoginComponent implements OnInit {
       }) 
     }
     else{
-     this.toaster.error('Email and Password Required');
+    alert('Email and Password Required');
     }
   }
 

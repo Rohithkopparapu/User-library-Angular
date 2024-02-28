@@ -101,6 +101,9 @@ export class ReturbooksComponent {
   }
 
   booklist(){
+    this.router.navigate(['management'])
+  }
+  issuebooks(){
     this.router.navigate(['student/booklist'])
   }
 }
