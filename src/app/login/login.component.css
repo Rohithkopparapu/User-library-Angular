@@ -38,9 +38,7 @@
     background-color: white;
     box-shadow: 10px;
 }
-.image-content{
-   /* width: 45%; */
-}
+
 .logo{
     width: 450px;
     height: 450px;
@@ -50,9 +48,6 @@
     margin-top: 100px;
     margin-left: 50px;
     width: 350px;
-}
-.login{
-
 }
 .login-word{
     font-size: 25px;

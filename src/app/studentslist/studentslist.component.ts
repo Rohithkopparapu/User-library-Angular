@@ -4,6 +4,7 @@ import { BookserviceService } from 'src/bookservice.service';
 import { PostnewbookComponent } from '../postnewbook/postnewbook.component';
 import { ReturbooksComponent } from '../returbooks/returbooks.component';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 declare var $: any;
 @Component({
   selector: 'app-studentslist',
@@ -30,7 +31,17 @@ export class StudentslistComponent implements OnInit {
   studentnumber!:any;
   check!:any;
   response:any='';
-  constructor(private service: BookserviceService, private modal: NgbModal,private router:Router) { }
+  constructor(private service: BookserviceService, private modal: NgbModal,private router:Router,private location:Location) { 
+    window.addEventListener('popstate',() => {
+      // Add your logic to prevent or handle the navigation
+      const allowNavigation = false;
+      // Replace with your condition
+      if(!allowNavigation) {
+        // Restore the previous state and prevent the navigation
+        this.location.forward();
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.getAllBooks();
@@ -95,10 +106,11 @@ export class StudentslistComponent implements OnInit {
   clear() {
     this.searchByCategoryName = '';
     this.searchCatName();
+    
   }
 
   addbooks(book: any, index: number) {
-    const deatils = localStorage.getItem('loginuserdetails');
+    const deatils = sessionStorage.getItem('loginuserdetails');
     if (!this.showifuserclickadd[index]) {
       this.showifuserclickadd[index] = [];
     }
@@ -121,7 +133,7 @@ export class StudentslistComponent implements OnInit {
   }
   removebook(book: any, index: any) {
 
-    const deatils = localStorage.getItem('loginuserdetails');
+    const deatils = sessionStorage.getItem('loginuserdetails');
     if (deatils != null) {
       const userdetails = JSON.parse(deatils);
       if (userdetails.role === 'Librarian' || userdetails.role === 'Admin') {
@@ -166,7 +178,7 @@ export class StudentslistComponent implements OnInit {
     this.message = '';
   }
   issusebooks() {
-    const deatils = localStorage.getItem('loginuserdetails');
+    const deatils = sessionStorage.getItem('loginuserdetails');
     if (deatils != null) {
       const userdetails = JSON.parse(deatils);
       if (userdetails.role === 'Librarian') {

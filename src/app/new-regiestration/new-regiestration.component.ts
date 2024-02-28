@@ -19,7 +19,8 @@ export class NewRegiestrationComponent implements OnInit {
     'Librarian',
     'Student'
   ];
-  constructor(private builder:FormBuilder,private service:BookserviceService,private router:Router){}
+  constructor(private builder:FormBuilder,private service:BookserviceService,private router:Router){
+  }
 
   ngOnInit(): void {
     this.employeeForm=this.builder.group({
@@ -33,6 +34,7 @@ export class NewRegiestrationComponent implements OnInit {
       
       
     })
+    
   }
   get loadRegistration()
   {

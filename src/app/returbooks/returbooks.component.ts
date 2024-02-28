@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookserviceService } from 'src/bookservice.service';
@@ -14,7 +15,16 @@ export class ReturbooksComponent {
   userreturnbooks: any[] = [];
   returnbooksForPayload: any[] = [];
   charges!: any;
-  constructor(private service: BookserviceService,private router:Router) { }
+  constructor(private service: BookserviceService,private router:Router,private location:Location) {
+    window.addEventListener('popstate',() => {
+      // Add your logic to prevent or handle the navigation
+      const allowNavigation = false;
+      // Replace with your condition
+      if(!allowNavigation) {
+        // Restore the previous state and prevent the navigation
+        this.location.forward();
+      }
+    });   }
 
   search() {
     if (this.studentid && this.studentid.trim() !== '') {

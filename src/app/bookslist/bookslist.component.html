@@ -23,7 +23,7 @@
           <th>Action</th>
         </tr>
       </thead>
-      <tbody *ngIf="allbooksInLibrary">
+      <tbody *ngIf="allbooksInLibrary.length > 0">
         <tr *ngFor="let book of allbooksInLibrary;let i= index">
           <td *ngIf="editbook">{{ book.categoryname }}</td>
           <td *ngIf="!editbook"><input type="text" [(ngModel)]="allbooksInLibrary[i].categoryname"></td>
