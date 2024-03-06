@@ -20,8 +20,6 @@ import { GenrateGraphsComponent } from './genrate-graphs/genrate-graphs.componen
 import { GenratebackupComponent } from './genratebackup/genratebackup.component';
 import { SearchBookComponent } from './search-book/search-book.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,11 +43,12 @@ import { SearchBookComponent } from './search-book/search-book.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    
    
   ],
   providers:[
     provideAnimations(), // required animations providers
-
+    
   ],
   bootstrap: [AppComponent]
 })
