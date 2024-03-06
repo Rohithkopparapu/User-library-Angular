@@ -16,7 +16,6 @@ const routes: Routes = [
   {
     path:'newRegister',
     component:NewRegiestrationComponent,
-    canActivate:[AuthGuard]
   },
   {
     path:'login',
@@ -25,7 +24,6 @@ const routes: Routes = [
   {
     path:'phonelogin',
     component:PhoneloginComponent,
-    canActivate:[AuthGuard]
   },
   {
     path:'bookslist',

@@ -1,1 +1,42 @@
-
+<section class="chart-section">
+    <div class="reports" >
+        <p>Library Reports</p>
+    </div>
+   <div class="show">
+    <div class="issuedtes">
+        <div style="text-align: center;color: red;">
+            <p>Issue Date - Books Count  {{options}}</p>
+        </div>
+        <div class="options">
+            <label>Please Select Date:</label>
+            <select [(ngModel)]="options" (change)="showReportsBasedForIssued(options)">
+                <option *ngFor="let day of reports" [value]="day" selected>{{day}}</option>
+              </select>
+        </div>
+        <div class="chart-container">
+            <canvas  style="width: 400px;height: 400px;" id="MyChart"></canvas>
+          </div>
+          <div *ngIf="booksList.length === 0">
+               <p class="NoBooks">No Books Issued</p>
+          </div>
+       </div>
+       <div class="returndates">
+        <div style="text-align: center;color: red;">
+            <p>Return Date - Charges Genrated  {{check}}</p>
+        </div>
+        <div class="options">
+            <label>Please Select Date:</label>
+            <select [(ngModel)]="check" (change)="showReportsForReturn(check)">
+                <option *ngFor="let day of reports" [value]="day" selected>{{day}}</option>
+              </select>
+        </div>
+    <div class="chart-container">
+        <canvas  style="width: 400px;height: 400px;" id="MyChartForReturn"></canvas>
+      </div>
+      <div *ngIf="returnBookList.length === 0">
+           <p class="NoBooks">No Books Returned</p>
+      </div>
+   </div>
+</div>
+  </section>
+  
