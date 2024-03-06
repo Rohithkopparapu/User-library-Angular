@@ -223,12 +223,7 @@ const headers = new HttpHeaders({
 }
 
 deleteStudentList(id:any){
-  // if(this.auth_token){
-  //   this.auth_token.subscribe((data)=>{
-  //     this.token=data;
-  //   })
  
-  // }
   if(sessionStorage.getItem('auth_token') != null){
     this.token=sessionStorage.getItem('auth_token');
  }
@@ -237,6 +232,20 @@ const headers = new HttpHeaders({
    
   });
  return this.http.delete(`http://localhost:8080/catController/student/${id}`,{headers:headers}).pipe(map((res)=>{
+    return res;
+  }))
+}
+
+genrateGraphs(type:string){
+  
+  if(sessionStorage.getItem('auth_token') != null){
+    this.token=sessionStorage.getItem('auth_token');
+ }
+const headers = new HttpHeaders({
+   'Authorization':`Bearer ${this.token}`,
+   
+  });
+ return this.http.get(`http://localhost:8080/catController/issuedbooks/report/${type}`,{headers:headers}).pipe(map((res)=>{
     return res;
   }))
 }

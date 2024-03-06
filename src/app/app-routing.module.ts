@@ -10,6 +10,7 @@ import { ManagementComponent } from './management/management.component';
 import { ListofstudentsComponent } from './listofstudents/listofstudents.component';
 import { SearchBookComponent } from './search-book/search-book.component';
 import { AuthGuard } from './auth.guard';
+import { GenrateGraphsComponent } from './genrate-graphs/genrate-graphs.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,6 @@ const routes: Routes = [
   {
     path:'login',
     component:LoginComponent,
- 
   },
   {
     path:'phonelogin',
@@ -40,6 +40,11 @@ const routes: Routes = [
   {
     path:'returnbooks',
     component:ReturbooksComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'graphs',
+    component:GenrateGraphsComponent,
     canActivate:[AuthGuard]
   },
   {
