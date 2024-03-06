@@ -15,10 +15,7 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit(): void {
-     this.service.startWatching().subscribe((data)=>{
-      console.log('Activate');
-      
-     })
+   
   }
   ngOnDestroy() {
     this.service.stopWatchingForActivity();

@@ -54,13 +54,13 @@ export class StudentslistComponent implements OnInit {
 
 
   studentslist(){
-    // this.service.getStudentsList().subscribe((data:any)=>{
-    // this.listofstudents=data;
-    // },(err)=>{
-    //   if(err){
-    //     this.apiresponse = err.error.message;
-    //   }
-    // })
+    this.service.getStudentsList().subscribe((data:any)=>{
+    this.listofstudents=data;
+    },(err)=>{
+      if(err){
+        this.apiresponse = err.error.message;
+      }
+    })
     
   }
 

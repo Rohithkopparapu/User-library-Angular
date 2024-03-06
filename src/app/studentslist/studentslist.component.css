@@ -44,3 +44,9 @@
     opacity: 1; /* Optional: Reduce opacity to visually indicate the disabled state */
     pointer-events: none; /* Disable pointer events */
 }
+li{
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40%;
+}
