@@ -37,7 +37,8 @@
             </ul>
           </td>
           <td>
-            <button type="button" class="edit-button" (click)="editbooks(book)">Edit</button>
+            <button *ngIf="editbook" type="button" class="edit-button" (click)="editbooks(book)">Edit</button>
+            <button *ngIf="!editbook" type="button" class="edit-button" (click)="updateBooks(book)">Update</button>
             <button type="button" class="delete-button" (click)="deletebooks(book._id)">Delete</button>
           </td>
         </tr>

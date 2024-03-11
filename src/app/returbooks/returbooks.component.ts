@@ -29,7 +29,15 @@ export class ReturbooksComponent {
   search() {
     if (this.studentid && this.studentid.trim() !== '') {
       this.service.getIssuedBookedBasedOnStdId(this.studentid).subscribe((data: any) => {
-        this.issuedbooks = data;
+         if(data.length > 0){
+          this.issuedbooks = data;
+         }
+         else{
+          this.message = `No Books Issued for Student ID : ${this.studentid}`;
+          setTimeout(() => {
+            this.message =''
+          }, 2000);
+         }
       }, (err) => {
         if (err) {
           this.message = err.error.message;

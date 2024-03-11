@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 // import { Chart } from 'chart.js';
 import Chart from 'chart.js/auto';
 import { BookserviceService } from 'src/bookservice.service';
@@ -17,10 +18,13 @@ export class GenrateGraphsComponent implements OnInit {
   issueBookGrpahsValues: any[] = [];
   returnBookGraphValues: any[] = [];
   chart: any;
-  options: any = 'For 15 days';
+  options: any = 'Monthly';
   chartforreturn: any;
-  check: any = 'For 15 days';
-  constructor(private service: BookserviceService) { }
+  check: any = 'Monthly';
+  startDate!:Date;
+  endDate!:Date;
+  customeIssueChart:any
+  constructor(private service: BookserviceService,private router:Router) { }
 
   ngOnInit(): void {
     this.genrateGraphsForIssued(this.options);
@@ -33,6 +37,8 @@ export class GenrateGraphsComponent implements OnInit {
       // this.returnBookList = data.message;
       this.dataForGraphs();
       // this.dataForreturnBookGraph();
+    
+      
     })
   }
 
@@ -63,6 +69,24 @@ export class GenrateGraphsComponent implements OnInit {
     let resultArray = Object.values(result);
     this.issueBookGrpahsValues = resultArray;
     this.createChart();
+  }
+
+  customGraphs() {
+    this.booksList = this.booksList.flatMap(data => data.books);
+    //to retive array based on issuedate and bookcount on same date
+    let result = this.booksList.reduce((acc, data) => {
+      let dateOnly = data.issuedate.split('T')[0];
+      data.issuedate = dateOnly;
+      if (acc[dateOnly]) {
+        acc[dateOnly].bookcount++;
+      } else {
+        acc[dateOnly] = { issuedate: data.issuedate, bookcount: 1 };
+      }
+      return acc;
+    }, {});
+    let resultArray = Object.values(result);
+    this.issueBookGrpahsValues = resultArray;
+    this.customChart();
   }
 
   dataForreturnBookGraph() {
@@ -155,13 +179,56 @@ export class GenrateGraphsComponent implements OnInit {
             x: {
               title: {
                 display: true,
-                text: 'Retrun Date' // Label for the y-axis
+                text: 'Return Date' // Label for the y-axis
               }
             },
             y: {
               title: {
                 display: true,
                 text: 'Charges' // Label for the y-axis
+              }
+            }
+
+          }
+        }
+      })
+
+    }
+  }
+
+  customChart(){
+    
+    if (this.customeIssueChart) {
+      this.customeIssueChart.destroy();
+    }
+    if (this.booksList.length > 0) {
+      this.customeIssueChart = new Chart("customChart", {
+        type: 'bar',
+        data: {
+          labels: this.issueBookGrpahsValues.map(data => data.issuedate),
+          datasets: [
+            {
+              label: "Book Count",
+              data: this.issueBookGrpahsValues.map(data => data.bookcount),
+              backgroundColor: 'blue'
+            }
+          ]
+        },
+        options: {
+          aspectRatio: 1.0,
+          responsive: false,
+          indexAxis: 'x', // Set the index axis to 'y'
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Issue Date' // Label for the y-axis
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Book count' // Label for the y-axis
               }
             }
 
@@ -180,8 +247,35 @@ export class GenrateGraphsComponent implements OnInit {
   showReportsForReturn(option: any) {
     this.check = option;
     this.genrateGraphsForReturn(this.check);
+    console.log(this.startDate.getFullYear());
+    console.log(this.endDate);
+    
   }
-
+  searchCountByChocie(){
+    if (this.endDate && this.startDate) {
+      const diffInDays = Math.floor((Date.parse(this.endDate.toString()) - Date.parse(this.startDate.toString())) / (1000 * 60 * 60 * 24));
+      if (diffInDays < 7) {
+        alert(`Start Date and End Date should be greater than or equal 7 days`);
+      } else {
+        this.service.customeGraphs(this.startDate,this.endDate).subscribe((data:any)=>{
+          if(data.message.length > 0){
+            this.booksList = data.message;
+            this.customGraphs();
+            
+          }
+          else{
+            alert(`No books issued between ${this.startDate} - ${this.endDate} `)
+          }
+        })
+      }
+    } else {
+      alert(`Please select Start Date and End Date`);
+    }
+    
+  }
+  backtoHomepage(){
+    this.router.navigate(['management'])
+  }
 }
 
 

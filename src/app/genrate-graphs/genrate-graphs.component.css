@@ -3,7 +3,7 @@
     font-size: 40px;
     font-family: 'Courier New', Courier, monospace;
     color: red;
-    margin: 30px;
+    margin: 5px;
     
 }
 .options{
@@ -27,15 +27,121 @@ canvas{
   font-size: 20px;
   color: red;
 }
-.show{
+/* .show{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 70%;
+    width: 95%;
     margin: 20px;
-    margin-left: 100px;
-}
+    margin-left: 10px; 
+} */
 .returndates{
     display: block;
    
 }
+.chart-section {
+    padding: 20px;
+    margin: 0;
+    /* border:1px solid rgb(104, 233, 19); */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Neat box shadow */
+    background-color: #fff; /* Background color */
+  }
+  
+
+.date-selection {
+  margin-bottom: 20px;
+  display: block;
+  /* justify-content: space-between;
+  align-items: flex-start;
+  width: 50%; */
+}
+.dates{
+    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* width: 50%; */
+}
+
+.selection{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date-selection label {
+  margin-right: 10px;
+}
+
+.reports {
+  margin-bottom: 20px;
+}
+
+/* .show {
+  display: flex;
+  justify-content: space-between;
+} */
+
+.issuedtes,
+.returndates {
+  width: 48%;
+}
+
+.options {
+  margin-bottom: 10px;
+}
+
+.chart-container {
+  margin-bottom: 20px;
+}
+
+.NoBooks {
+  color: red;
+}
+
+/* Styling for select dropdowns */
+select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+/* Styling for canvas */
+canvas {
+  width: 100%;
+  height: auto;
+}
+
+.show {
+    display: flex;
+    justify-content: space-between;
+    /* border: 2px solid rgb(20, 201, 225);  */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Neat box shadow */
+    width: 100%;
+    /* margin: 20px; */
+    /* margin-left: 10px;  */
+  }
+  
+  .issuedtes,
+  .returndates,
+  .date-selection {
+    padding: 20px;
+    flex: 0 0 30%;
+    box-sizing: border-box; /* Include padding in width calculation */
+    background-color: #fff; /* Background color */
+    border: 1px solid #ccc; /* Add border to each div */
+    border-radius: 8px; /* Rounded corners */
+    /* margin-bottom: 20px;  */
+  }
+  
+  .issuedtes,
+  .returndates {
+    margin-right: 20px; /* Add space between the two divs */
+  }
+  

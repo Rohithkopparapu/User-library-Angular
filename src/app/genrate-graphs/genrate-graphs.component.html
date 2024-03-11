@@ -1,42 +1,75 @@
 <section class="chart-section">
-    <div class="reports" >
-        <p>Library Reports</p>
+
+   
+    <div class="reports">
+        <p style="margin: 0;padding: 0;">Library Reports</p>
+        <div style="float: left;">
+            <button type="button" class="btn btn-primary" (click)="backtoHomepage()">Home</button>
+        </div>
     </div>
-   <div class="show">
-    <div class="issuedtes">
-        <div style="text-align: center;color: red;">
-            <p>Issue Date - Books Count  {{options}}</p>
+
+
+    <div class="show">
+        <div class="issuedtes">
+            <div style="text-align: center;color: red;">
+                <p>Issue Date - Books Count {{options}}</p>
+            </div>
+            <div class="options">
+                <label>Please Select Date:</label>
+                <select [(ngModel)]="options" (change)="showReportsBasedForIssued(options)">
+                    <option *ngFor="let day of reports" [value]="day" selected>{{day}}</option>
+                </select>
+            </div>
+            <div class="chart-container">
+                <canvas style="width: 400px;height: 400px;" id="MyChart"></canvas>
+            </div>
+            <div *ngIf="booksList.length === 0">
+                <p class="NoBooks">No Books Issued</p>
+            </div>
         </div>
-        <div class="options">
-            <label>Please Select Date:</label>
-            <select [(ngModel)]="options" (change)="showReportsBasedForIssued(options)">
-                <option *ngFor="let day of reports" [value]="day" selected>{{day}}</option>
-              </select>
+
+        <div class="returndates">
+            <div style="text-align: center;color: red;">
+                <p>Return Date - Charges Generated {{check}}</p>
+            </div>
+            <div class="options">
+                <label>Please Select Date:</label>
+                <select [(ngModel)]="check" (change)="showReportsForReturn(check)">
+                    <option *ngFor="let day of reports" [value]="day" selected>{{day}}</option>
+                </select>
+            </div>
+            <div class="chart-container">
+                <canvas style="width: 400px;height: 400px;" id="MyChartForReturn"></canvas>
+            </div>
+            <div *ngIf="returnBookList.length === 0">
+                <p class="NoBooks">No Books Returned</p>
+            </div>
         </div>
-        <div class="chart-container">
-            <canvas  style="width: 400px;height: 400px;" id="MyChart"></canvas>
-          </div>
-          <div *ngIf="booksList.length === 0">
-               <p class="NoBooks">No Books Issued</p>
-          </div>
-       </div>
-       <div class="returndates">
-        <div style="text-align: center;color: red;">
-            <p>Return Date - Charges Genrated  {{check}}</p>
+        <div class="date-selection">
+            <div>
+                <p style="margin: 0;font-size: 15px;color: red;">Custom Search of Issue Dates - books Count</p>
+            </div>
+            <div class="dates">
+                <div class="selection">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate" [(ngModel)]="startDate">
+                </div>
+                <div class="selection">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate" [(ngModel)]="endDate">
+                </div>
+            </div>
+            <div style="float: right;">
+                <button class="btn btn-primary" (click)="searchCountByChocie()">Search</button>
+            </div>
+            <div>
+                <p style="margin: 0;font-size: 12px;"><span style="color: red;font-size: 12px;">Note* :</span>Start Date
+                    and End Date Should have difference more than 7 days</p>
+            </div>
+            <div class="chart-container">
+                <canvas style="width: 400px;height: 400px;" id="customChart"></canvas>
+            </div>
         </div>
-        <div class="options">
-            <label>Please Select Date:</label>
-            <select [(ngModel)]="check" (change)="showReportsForReturn(check)">
-                <option *ngFor="let day of reports" [value]="day" selected>{{day}}</option>
-              </select>
-        </div>
-    <div class="chart-container">
-        <canvas  style="width: 400px;height: 400px;" id="MyChartForReturn"></canvas>
-      </div>
-      <div *ngIf="returnBookList.length === 0">
-           <p class="NoBooks">No Books Returned</p>
-      </div>
-   </div>
-</div>
-  </section>
-  
+    </div>
+
+</section>
