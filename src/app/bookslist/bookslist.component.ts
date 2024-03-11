@@ -16,24 +16,24 @@ export class BookslistComponent implements OnInit {
   searchByCategoryName = '';
   allbooks: any[] = [];
   message!: string;
-  editbook!:boolean;
-  apiresponse:string='';
-  constructor(private service: BookserviceService,private modal:NgbModal,private router:Router,private location:Location) {
-    window.addEventListener('popstate',() => {
+  editbook!: boolean;
+  apiresponse: string = '';
+  constructor(private service: BookserviceService, private modal: NgbModal, private router: Router, private location: Location) {
+    window.addEventListener('popstate', () => {
       // Add your logic to prevent or handle the navigation
       const allowNavigation = false;
       // Replace with your condition
-      if(!allowNavigation) {
+      if (!allowNavigation) {
         // Restore the previous state and prevent the navigation
         this.location.forward();
       }
     });
-   }
+  }
 
   ngOnInit(): void {
     this.getAllBooks();
-    this.service.ifeditthebooks.subscribe((data)=>{
-      this.editbook=data;
+    this.service.ifeditthebooks.subscribe((data) => {
+      this.editbook = data;
     })
   }
 
@@ -78,97 +78,103 @@ export class BookslistComponent implements OnInit {
     this.searchCatName();
   }
 
-  editbooks(book:any) {
-    const deatils=sessionStorage.getItem('loginuserdetails');
-   if(deatils != null){
-    const userdetails=JSON.parse(deatils);
-   if(userdetails.role === 'Admin' || userdetails.role === 'Librarian')
-   {
-    this.service.editbooks(book._id,book).subscribe((data:any)=>{
-      if(data){
-        this.apiresponse=data.message;
-        setTimeout(() => {
-          this.apiresponse = '';
-        }, 2000);
-        
-      } 
-  },(err)=>{
-     this.apiresponse=err.error.message;
-     setTimeout(() => {
-      this.apiresponse = '';
-    }, 2000);
-    
-    
-  })
-   }
-   }
+  editbooks(book: any) {
+    this.service.ifeditthebooks.next(false);
+
   }
-  deletebooks(book:any){
-  
-    const deatils=sessionStorage.getItem('loginuserdetails');
-    if(deatils != null){
-     const userdetails=JSON.parse(deatils);
-     if(userdetails.role === 'Admin'){
-      this.service.deletebook(book).subscribe((data:any)=>{
-        if(data){
-          this.apiresponse=data.message;
+
+  updateBooks(book: any) {
+    const deatils = sessionStorage.getItem('loginuserdetails');
+    if (deatils != null) {
+      const userdetails = JSON.parse(deatils);
+      if (userdetails.role === 'Admin' || userdetails.role === 'Librarian') {
+        this.service.editbooks(book._id, book).subscribe((data: any) => {
+          if (data) {
+            this.apiresponse = data.message;
+            setTimeout(() => {
+              this.apiresponse = '';
+              this.service.ifeditthebooks.next(true);
+            }, 2000);
+
+          }
+        }, (err) => {
+          this.apiresponse = err.error.message;
           setTimeout(() => {
             this.apiresponse = '';
           }, 2000);
-          this.getAllBooks()
-        }
-      },(err)=>{
-        this.apiresponse=err.error.message;
-        setTimeout(() => {
-         this.apiresponse = '';
-       }, 2000);
-      })
-     }
-     else{
-      this.apiresponse = 'Records Can be deleted by Admin';
-      setTimeout(() => {
-        this.apiresponse=''
-      }, 2000);
-     }
 
+
+        })
+      }
     }
 
   }
+  deletebooks(book: any) {
 
-  deletebookbasedonCat(cname:any,bname:any){
-      const deatils=sessionStorage.getItem('loginuserdetails');
-      if(deatils != null){
-       const userdetails=JSON.parse(deatils);
-       if(userdetails.role === 'Admin' || userdetails.role === 'Librarian'){
-        this.service.deletebooksbasedoncategory(cname,bname).subscribe((data:any)=>{
-          if(data){
-            this.apiresponse=data.message;
+    const deatils = sessionStorage.getItem('loginuserdetails');
+    if (deatils != null) {
+      const userdetails = JSON.parse(deatils);
+      if (userdetails.role === 'Admin') {
+        this.service.deletebook(book).subscribe((data: any) => {
+          if (data) {
+            this.apiresponse = data.message;
             setTimeout(() => {
               this.apiresponse = '';
             }, 2000);
             this.getAllBooks()
           }
-        },(err)=>{
-          this.apiresponse=err.error.message;
+        }, (err) => {
+          this.apiresponse = err.error.message;
           setTimeout(() => {
-           this.apiresponse = '';
-         }, 2000);
+            this.apiresponse = '';
+          }, 2000);
         })
-       } else{
+      }
+      else {
         this.apiresponse = 'Records Can be deleted by Admin';
         setTimeout(() => {
-          this.apiresponse=''
+          this.apiresponse = ''
         }, 2000);
-       }
       }
-    
+
+    }
+
   }
 
-  postnewbook(){
+  deletebookbasedonCat(cname: any, bname: any) {
+    const deatils = sessionStorage.getItem('loginuserdetails');
+    if (deatils != null) {
+      const userdetails = JSON.parse(deatils);
+      if (userdetails.role === 'Admin' || userdetails.role === 'Librarian') {
+        this.service.deletebooksbasedoncategory(cname, bname).subscribe((data: any) => {
+          if (data) {
+            this.apiresponse = data.message;
+            setTimeout(() => {
+              this.apiresponse = '';
+            }, 2000);
+            this.getAllBooks()
+          }
+        }, (err) => {
+          this.apiresponse = err.error.message;
+          setTimeout(() => {
+            this.apiresponse = '';
+          }, 2000);
+        })
+      } else {
+        this.apiresponse = 'Records Can be deleted by Admin';
+        setTimeout(() => {
+          this.apiresponse = ''
+        }, 2000);
+      }
+    }
+
+  }
+
+  postnewbook() {
     this.modal.open(PostnewbookComponent);
   }
 
-  navigatetohome(){
+  navigatetohome() {
     this.router.navigate(['management']);
   }
 

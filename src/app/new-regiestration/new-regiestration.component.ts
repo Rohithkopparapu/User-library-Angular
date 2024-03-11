@@ -60,6 +60,7 @@ export class NewRegiestrationComponent implements OnInit {
      this.service.saveNewUser(newuserdata).subscribe((data:any)=>{
       if(data.status === 200){
           this.message=data.message;
+          this.employeeForm.reset();
           this.router.navigate(['login']);
       }
       if(data.status === 501){
