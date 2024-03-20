@@ -13,9 +13,14 @@
             <div *ngFor="let book of connectFormArray.controls; let i = index" class="book-group">
                 <div [formGroupName]="i">
                     <div class="d-flex justify-content-space align-items-center">
-                        <input type="text" placeholder="Book title" formControlName="title" class="form-control" />
+                        <!-- <input type="text"  placeholder="Book ID" formControlName="_id" class="form-control" /> -->
+                        <input type="text"  placeholder="Book title" formControlName="title" class="form-control" />
+                        <input type="number" placeholder="Book Count" formControlName="bookcount" class="form-control" />
                         <span *ngIf="connectFormArray.controls[i].get('title')?.hasError('required') && connectFormArray.controls[i].get('title')?.touched"
                         style="color: red;">Title is required</span>
+                        <span *ngIf="connectFormArray.controls[i].get('bookcount')?.hasError('required') && connectFormArray.controls[i].get('bookcount')?.touched"
+                        style="color: red;"><B></B>ookcount is required</span>
+                       
                         <button (click)="addbook()" class="btn btn-primary"><img
                                 src="https://cdn-icons-png.flaticon.com/128/3416/3416075.png" alt="Add"
                                 style="height: 20px;" /></button>

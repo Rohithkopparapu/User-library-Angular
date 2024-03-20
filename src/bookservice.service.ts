@@ -263,6 +263,19 @@ export class BookserviceService implements OnInit {
     }))
   }
 
+  addNewBooktoExistingCategory(adminId:any,book:any){
+
+    if (sessionStorage.getItem('auth_token') != null) {
+      this.token = sessionStorage.getItem('auth_token');
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`,
+
+    });
+    return this.http.post(`http://localhost:8080/catController/addNewBooktoExistingCategory/${adminId}`,book,{ headers: headers }).pipe(map((res) => {
+      return res;
+    }))
+  }
 }
 
 

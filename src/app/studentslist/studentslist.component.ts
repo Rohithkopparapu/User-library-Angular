@@ -253,8 +253,8 @@ export class StudentslistComponent implements OnInit {
   }
 
   requestForBooks(){
-    if(this.studentmail != '' && this.studentpassword != ''){
-     this.check = this.listofstudents.find(item=>item.email === this.studentmail && item.password === this.studentpassword);
+    if((this.studentmail != '' || this.studentnumber != '') && this.studentpassword != ''){
+     this.check = this.listofstudents.find(item=>(item.email === this.studentmail && item.password === this.studentpassword) || (item.phone === this.studentnumber && item.password === this.studentpassword));
     if(this.check){
       $('#requestModal').modal('show');
       $('#exampleModal').modal('hide');
