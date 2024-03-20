@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { BookserviceService } from 'src/bookservice.service';
 import { PostnewbookComponent } from '../postnewbook/postnewbook.component';
 import { Router } from '@angular/router';
@@ -18,6 +18,7 @@ export class BookslistComponent implements OnInit {
   message!: string;
   editbook!: boolean;
   apiresponse: string = '';
+  
   constructor(private service: BookserviceService, private modal: NgbModal, private router: Router, private location: Location) {
     window.addEventListener('popstate', () => {
       // Add your logic to prevent or handle the navigation
@@ -151,6 +152,7 @@ export class BookslistComponent implements OnInit {
             this.apiresponse = data.message;
             setTimeout(() => {
               this.apiresponse = '';
+              this.service.ifeditthebooks.next(true);
             }, 2000);
             this.getAllBooks()
           }
@@ -176,6 +178,15 @@ export class BookslistComponent implements OnInit {
 
   navigatetohome() {
     this.router.navigate(['management']);
+  }
+
+  addBooktoExistingCategory(book:any){
+ const modalOptions: NgbModalOptions = {
+      backdrop: 'static', // Prevents closing when clicking outside
+      keyboard: false // Prevents closing when pressing the escape key
+    };
+   const modalRef=this.modal.open(PostnewbookComponent,modalOptions);
+   modalRef.componentInstance.book = book;
   }
 
 }
